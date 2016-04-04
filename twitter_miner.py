@@ -22,7 +22,10 @@ def format_status(status):
 	#h = HTML(newlines = False)
 	#import pdb;pdb.set_trace()
 	entities_list= []
-	for entity_type in ["user_mentions", "hashtags","urls"]:
+	entity_type_list = ["user_mentions", "hashtags","urls"]
+	if "media" in status.entities:
+		entity_type_list.append("media")
+	for entity_type in entity_type_list:
 		for entity in  status.entities[entity_type]:
 			entity.update({"entity_type":entity_type})
 			entities_list.append(dict(entity))
@@ -80,9 +83,21 @@ def twitter_miner(users, count, cursor):
 
 	
 	status, min_id = get_statuses(api, users, count, cursor)
+	#import pdb;pdb.set_trace()
 	json_dict = construct_json(status, min_id)
 	json_result = json.dumps(json_dict)
 	return json_result
+
+def test_case():
+        users = ["BigSean"]
+        count = 5
+	cursor = None
+        result = twitter_miner(users, count, cursor)
+	import pdb;pdb.set_trace()
+
+if __name__ == "__main__":
+	test_case()
+
 """
 status2, min_id = get_statuses(api, users, count, min_id)
 json_dict2 = construct_json(status2, min_id)
