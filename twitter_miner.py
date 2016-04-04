@@ -68,15 +68,22 @@ def construct_json(statuses_list, next_cursor):
 
 	return json_dict
 
+def twitter_miner(users, count, cursor):
 
-api=twitter_api_login()
 
-count = 5
-users=["forestliurui", "joebonsall", "TheDeenShow"]
-#users = ["forestliurui"]
-status1, min_id = get_statuses(api, users, count)
-json_dict1 = construct_json(status1, min_id)
-json1 = json.dumps(json_dict1)
+	api=twitter_api_login()
+
+	#count = 5
+	#users=["forestliurui", "joebonsall", "TheDeenShow"]
+	#users = ["forestliurui"]
+	
+
+	
+	status, min_id = get_statuses(api, users, count, cursor)
+	json_dict = construct_json(status, min_id)
+	json_result = json.dumps(json_dict)
+	return json_result
+"""
 status2, min_id = get_statuses(api, users, count, min_id)
 json_dict2 = construct_json(status2, min_id)
 
@@ -121,7 +128,7 @@ for status in tweepy.Cursor(api.user_timeline, screen_name="joebonsall", max_id 
         else:
                 min_id = min(min_id, status.id)
         num+=1
-
+"""
 
 
 
