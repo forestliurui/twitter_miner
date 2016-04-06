@@ -1,6 +1,7 @@
 import requests
 import json
 from urllib import urlencode
+from twitter_miner import write2html
 
 def client():
 	s = requests.Session()
@@ -15,7 +16,11 @@ def client():
 	#url = "http://localhost:8080?screen_names=forestliurui,TheDeenShow&count=3"
 	r = s.get(url)
 	json_return = r.text
+	
+	write2html(json_return, "test1.html")
+	
 	json_object = json.loads(json_return)
+	"""
 	print json_object
 	print ""
 	
@@ -24,13 +29,14 @@ def client():
 		for status in json_object["statuses"]:
 			#fp.write(status["status"])
 			json.dump(status["status"],fp)
-
+	"""
 	url +="&cursor="+json_object["next_cursor"]
 	r = s.get(url)
         json_return = r.text
         json_object = json.loads(json_return)
-	print json_object
-	import pdb;pdb.set_trace()	
+	write2html(json_return, "test2.html")
+	#print json_object
+	#import pdb;pdb.set_trace()	
 
 if __name__ == "__main__":
 	client()

@@ -66,7 +66,7 @@ def construct_json(statuses_list, next_cursor):
 	json_dict["statuses"] = []
 	
 	for status in statuses_list:
-		
+		#import pdb;pdb.set_trace()
 		json_dict["statuses"].append({"status":format_status(status), "user":status.user.screen_name})
 
 	return json_dict
@@ -88,11 +88,24 @@ def twitter_miner(users, count, cursor):
 	json_result = json.dumps(json_dict)
 	return json_result
 
+def write2html(json_result, outputfile_name):
+	result = json.loads(json_result)
+	
+	f= open(outputfile_name,'w')
+	for status_index in range(len(result["statuses"])):
+		status = result["statuses"][status_index]["status"]
+		f.write(status.encode("utf8"))
+		f.write("\n")
+	f.close()
+
+
 def test_case():
         users = ["BigSean"]
         count = 5
 	cursor = None
         result = twitter_miner(users, count, cursor)
+	outputfile_name = "test_miner.html"
+	write2html(result, outputfile_name)
 	import pdb;pdb.set_trace()
 
 if __name__ == "__main__":
