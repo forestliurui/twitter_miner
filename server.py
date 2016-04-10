@@ -2,8 +2,6 @@
 This is the server of twitter miner implemented using cherrypy
 """
 
-import random
-import string
 from twitter_miner import twitter_miner
 import cherrypy
 
@@ -34,7 +32,8 @@ if __name__ == '__main__':
              	'tools.response_headers.headers': [('Content-Type', 'text/plain')],
 		}
 	}
-  
+
+	#start the server  
 	cherrypy.quickstart(Miner_Server(), '/', conf) 
      
 

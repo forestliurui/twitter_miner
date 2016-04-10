@@ -24,16 +24,16 @@ def client(screen_names, count):
 	#write the json-type result into an html file
 	write2html(json_return, "test1.html")
 	
+
+
 	#the following code tries to use the returned next_cursor to send another request
 	json_object = json.loads(json_return)
 	
-
 	url +="&cursor="+json_object["next_cursor"]
 	r = s.get(url) #Send another GET request with cursor set as next_cursor from previous request
         json_return = r.text
         json_object = json.loads(json_return)
 	write2html(json_return, "test2.html")
-	
 	
 
 if __name__ == "__main__":

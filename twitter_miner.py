@@ -33,7 +33,8 @@ def format_status(status):
 			entity.update({"entity_type":entity_type})
 			entities_list.append(dict(entity))
 	if len(entities_list)!= 0:
-		entities_list.sort(key= lambda item:item["indices"][0], reverse= True)
+		entities_list.sort(key= lambda item:item["indices"][0], reverse= True) #sort the entities with respect to starting indices in descending order
+
 	#convert status into required html-like format according to different entity type	
 	status_formated = status.text
 	for entity in entities_list:
@@ -47,6 +48,7 @@ def format_status(status):
 			h = HTML()
 			h.a(entity["display_url"], href = entity["expanded_url"])
 		status_formated = status_formated[0:int(entity["indices"][0])]+unicode(h)+status_formated[int(entity["indices"][1]):]
+
 	return status_formated
 
 def get_statuses(api, users, count, max_id = None):
@@ -60,13 +62,16 @@ def get_statuses(api, users, count, max_id = None):
 		for status in tweepy.Cursor(api.user_timeline, screen_name=user_name, max_id =  (max_id - 1 if max_id else None)  ).items(count):
 			statuses_list.append(status)
 	    except Exception as e:
+		
 		#when failing to get statuses from user, print the error message
 		error_dict = json.loads(e.message)
 		for error_message in error_dict["errors"]:
 			print "Error Message occurs when trying to get statuses from user %s : %s" % (user_name, error_message["message"])
+	
 	#get the count number of most recent statuses from users that are before max_id
 	statuses_list.sort(key = lambda x: x.id, reverse = True) 
 	top_statuses_list = statuses_list[0:count]
+	
 	#get the minimum id/next cursor
 	if len(top_statuses_list) != 0:
 		min_id = min([status.id for status in top_statuses_list])
