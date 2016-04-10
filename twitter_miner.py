@@ -8,11 +8,11 @@ import json
 warnings.filterwarnings("ignore")
 
 def twitter_api_login(): #Login
-	consumer_key = 'eOlWInbxWsb0GrFb7sPbcerfG'
-	consumer_secret = 'vYAwYaGhgV2PSikjUyYZbUFheDDvckYlKl5ArYLdzlYSju8vYk'
-	access_token = '716475678993072128-7kVKnlTYWw27l0SJefrUEGjtnAspi1B'
-	access_secret = 'f7OAtB4sCp24ABvBxTaMRqCuR8iMMTeLO4QzscwGNZ6J3'
- 	#access_secret = 'f7OAtB4sCp24ABvBxTaMRqCuR8iMMTeLO4QzscwGNZ6J4'
+	consumer_key = 'EvDxkfP3xzlZp9Ss5HoTxBFu4'
+	consumer_secret = 'HoBfu1L2MLlozYhY2Gq99FtF3ZQIWyKVl2hjXEbJIUCAHL4sZ8'
+	access_token = '702257299012849669-WTfyYVWAdmUKqRq9zPsWtS5ugMhsjbd'
+	access_secret = '5uLYJnk4pIBoDKaOVC8jrteRc6KAD20jg62Bz7x6B3IuO'
+ 	
 	auth = OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_secret)
  
@@ -94,12 +94,16 @@ def twitter_miner(users, count, cursor):
 	"""
 	#login to the twitter api
 	api=twitter_api_login()
+
 	#get the list of statuses and next_cursor
 	status, next_cursor = get_statuses(api, users, count, cursor)
+
 	#convert the statuses and next_cursor into json_dict of dictionary format which is consistent with the desired json format
 	json_dict = construct_json(status, next_cursor)
-	#convert the json_dict into json_result which is of json type 
+
+	#convert the json_dict into json_result which is of required json format
 	json_result = json.dumps(json_dict)
+
 	return json_result
 
 def write2html(json_result, outputfile_name):
@@ -118,14 +122,14 @@ def write2html(json_result, outputfile_name):
 
 def test_case(): 
 	#test function for this file
-        users = ["BigSeannihao", "forestliurui"]
-        #users = ["forestliurui"]
+        users = ["kobebryant", "StephenCurry30"]
+        
 	count = 5
 	cursor = None
         result = twitter_miner(users, count, cursor)
 	outputfile_name = "test_miner.html"
 	write2html(result, outputfile_name)
-	import pdb;pdb.set_trace()
+	
 
 if __name__ == "__main__":
 	#invoke test function when this script is run from command line

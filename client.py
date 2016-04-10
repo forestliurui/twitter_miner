@@ -16,29 +16,28 @@ def client(screen_names, count):
 	
 	url =  "http://localhost:8080?"
 	url += urlencode(params)   #get the complete URL
-
-
-	#url = "http://localhost:8080?screen_names=forestliurui,TheDeenShow&count=3"
+	#url will look like "http://localhost:8080?screen_names=user1,user2&count=5"
+	
 	r = s.get(url) #Send GET request
 	json_return = r.text #extract requested json-type result
 	
 	#write the json-type result into an html file
 	write2html(json_return, "test1.html")
 	
-	#the following code tries to use the returned next_cursor to continue request
+	#the following code tries to use the returned next_cursor to send another request
 	json_object = json.loads(json_return)
-	print json_object
+	
 
 	url +="&cursor="+json_object["next_cursor"]
 	r = s.get(url) #Send another GET request with cursor set as next_cursor from previous request
         json_return = r.text
         json_object = json.loads(json_return)
 	write2html(json_return, "test2.html")
-	#print json_object
+	
 	
 
 if __name__ == "__main__":
 	#specify the screen names and count
-	screen_names = ["forestliurui", "BigSean"]
+	screen_names =  ["kobebryant", "StephenCurry30"]
         count = 5
 	client(screen_names, count)

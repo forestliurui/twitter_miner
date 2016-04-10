@@ -4,7 +4,7 @@ Twitter Miner
 Overview
 --------
 
-This Twitter Miner contains the program to extract statuses of pre-specified twitter users. It's written in Python.  
+This Twitter Miner contains the program to extract required number of most recent statuses of pre-specified twitter users. It's written in Python.  
 
 Installation
 ------------
@@ -27,7 +27,7 @@ Contents
 
 There are three source files: twitter_miner.py, server.py and client.py
 
-twitter_miner.py contains the main parts of required functionality. It is responsible for extracting statuses of pre-specified twitter users.
+twitter_miner.py contains the main parts of required functionality. It is responsible for extracting required number of most recent statuses of pre-specified twitter users and returning the results in required json format.
 
 server.py makes use of package cherrypy to build a server which could receive requests and then invoke functions in twitter_miner.py to get requested statuses
 

@@ -17,6 +17,7 @@ class Miner_Server(object):
 		count = int(count)
         	if cursor is not None:
 			cursor = int(cursor) 	
+
 		#invoke the twitter miner to get the json-type result 
 		json_result = twitter_miner(screen_names, count, cursor)
 	 
@@ -31,7 +32,6 @@ if __name__ == '__main__':
              	'tools.sessions.on': True,
              	'tools.response_headers.on': True,
              	'tools.response_headers.headers': [('Content-Type', 'text/plain')],
-             	'port':8000,
 		}
 	}
   
