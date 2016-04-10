@@ -2,6 +2,37 @@ import requests
 import json
 from urllib import urlencode
 from twitter_miner import write2html
+from httplib import HTTPConnection
+PORT = 8080
+
+def client1():
+	host = "http://localhost"
+        connection = HTTPConnection(host, PORT)
+        screen_names = ["forestliurui", "BigSean"]
+        count = 5
+        params ={"screen_names": ",".join(screen_names), "count": count}
+
+        url =  "http://localhost:8080?"
+        url += urlencode(params)
+
+
+        #url = "http://localhost:8080?screen_names=forestliurui,TheDeenShow&count=3"
+        req = connection.request("GET", urlencode(params))
+	resp = connection.getresponse()
+	try:
+		if resp.status == 200:
+		
+	
+        		json_return = resp.read()
+		else:
+			raise Exception("Got Code: %d" % resp.status)
+	except Exception as e:
+		print "Could not get response: %s" % e
+	
+        write2html(json_return, "test1.html")
+
+        json_object = json.loads(json_return)
+
 
 def client():
 	s = requests.Session()
@@ -20,6 +51,7 @@ def client():
 	write2html(json_return, "test1.html")
 	
 	json_object = json.loads(json_return)
+	print json_object
 	"""
 	print json_object
 	print ""
