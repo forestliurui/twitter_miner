@@ -10,9 +10,7 @@ sudo apt-get install python-pip
 sudo pip install tweepy==3.3.0
 sudo pip install html
 sudo pip install cherrypy
-sudo pip install json
 sudo pip install requests
-sudo pip install urllib
 
 
 
