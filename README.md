@@ -1,4 +1,5 @@
 Twitter Miner
+=============
 
 Overview
 --------
@@ -16,6 +17,7 @@ Usage
 -----
 
 To use the Twitter Miner, simply run the script run.sh after installation of relevant packages:
+
      ./run.sh
 
 It will first execute the server.py and let it running in the background. Then, after 5-second sleep (server needs some time to initialize), client.py will be executed which will tries to request statues using GET method.
