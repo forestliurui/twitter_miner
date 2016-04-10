@@ -6,9 +6,9 @@ from twitter_miner import twitter_miner
 import cherrypy
 
 class Miner_Server(object):
-     	exposed = True
+	exposed = True
 
-     	@cherrypy.tools.accept(media='text/plain')
+	@cherrypy.tools.accept(media='text/plain')
 	def GET(self, screen_names =None, count = None, cursor = None):
 	 
         	screen_names = screen_names.split(",")
